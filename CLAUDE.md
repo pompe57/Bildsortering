@@ -49,7 +49,9 @@ Phase plan (draft, only Fas 1 is done/settled):
 - **Fas 1 — Inventering ✅ Klar**: index all photos from all sources into SQLite (this script). EXIF, camera info, date, GPS.
 - **Fas 2 — Rensning (next, draft)**: MD5 exact duplicates removed; perceptual hashing to identify burst sequences and near-duplicates; manual review of candidates before sending to the bitbucket.
 - **Fas 3 — Taggning (draft)**: automatic tagging via an AI vision API (send an image, get back a description like "Two people at a dinner table, indoors, summer, likely 2010s"); `imagehash` for visual grouping; manual completion/correction of tags in the database.
-- **Fas 4 — Master-bibliotek (draft)**: consolidate onto one source (likely a LaCie drive) as the master copy — cleaned, tagged, searchable. Possibly a small custom search UI on top of the SQLite db.
+- **Fas 4 — not yet defined.** An earlier draft called this "consolidate onto a LaCie master library" — the user rejected that framing (2026-08-01). See LaCie note below; Fas 4's actual scope is still open.
+
+**LaCie drive**: a third data source that needs inventorying, expected to be mostly duplicate/backup material copied from the other sources — interesting to see what (if anything) is unique to it. Think of it as an extra backup disk to scan and cross-reference, **not** a master-library target. Note: `scan_bilder_v2.py` currently only supports two sources at once (`--källa1`/`--källa2`); scanning a third source will need either a second run against the same `--db` (adds a new `källor` row, fine) or an extension to support 3-way `korsanalys`.
 
 Sketched module layout (draft — only `scan_bilder_v2.py` exists; names/split below are a starting idea, not final):
 ```
@@ -58,7 +60,7 @@ Bildsortering/
 ├── phash_index.py         # Fas 2 — compute perceptual hash
 ├── duplicates.py          # Fas 2 — find and report duplicates
 ├── ai_tagger.py           # Fas 3 — AI-based image tagging
-├── cleanup.py             # Fas 2/4 — move/delete approved candidates
+├── cleanup.py             # Fas 2 — move/delete approved candidates
 ├── requirements.txt
 ├── CLAUDE.md
 └── onedrive.db            # the database (gitignored, machine-local)
