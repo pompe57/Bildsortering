@@ -51,7 +51,9 @@ Phase plan (draft, only Fas 1 is done/settled):
 - **Fas 3 — Taggning (draft)**: automatic tagging via an AI vision API (send an image, get back a description like "Two people at a dinner table, indoors, summer, likely 2010s"); `imagehash` for visual grouping; manual completion/correction of tags in the database.
 - **Fas 4 — not yet defined.** An earlier draft called this "consolidate onto a LaCie master library" — the user rejected that framing (2026-08-01). See LaCie note below; Fas 4's actual scope is still open.
 
-**LaCie drive**: a third data source that needs inventorying, expected to be mostly duplicate/backup material copied from the other sources — interesting to see what (if anything) is unique to it. Think of it as an extra backup disk to scan and cross-reference, **not** a master-library target. Note: `scan_bilder_v2.py` currently only supports two sources at once (`--källa1`/`--källa2`); scanning a third source will need either a second run against the same `--db` (adds a new `källor` row, fine) or an extension to support 3-way `korsanalys`.
+**Known sources (as of 2026-08-01): two — OneDrive and the LaCie drive.** More may turn up as the user keeps digging through old photo locations; treat the source list as open-ended, not fixed at two.
+- **OneDrive**: already scanned once into `onedrive.db` (this is the db file living in this repo's working dir).
+- **LaCie drive**: not yet scanned. Expected to be mostly duplicate/backup material copied from OneDrive — interesting to see what (if anything) is unique to it. Think of it as an extra backup disk to scan and cross-reference, **not** a master-library target (see Fas 4 above).
 
 Sketched module layout (draft — only `scan_bilder_v2.py` exists; names/split below are a starting idea, not final):
 ```
