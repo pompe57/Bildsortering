@@ -43,13 +43,15 @@ Re-running the script against the same `--db` file accumulates new `källor`/`bi
 
 Long-term goal: end up with a cleaned, tagged photo archive — captions explaining what's in each kept photo, and bad shots/duplicates/near-duplicate burst shots sent to "the big bitbucket in the sky."
 
-Phase plan:
-- **Fas 1 — Inventering ✅ Klar**: index all photos from all sources into SQLite (this script). EXIF, camera info, date, GPS.
-- **Fas 2 — Rensning (next)**: MD5 exact duplicates removed; perceptual hashing to identify burst sequences and near-duplicates; manual review of candidates before sending to the bitbucket.
-- **Fas 3 — Taggning**: automatic tagging via an AI vision API (send an image, get back a description like "Two people at a dinner table, indoors, summer, likely 2010s"); `imagehash` for visual grouping; manual completion/correction of tags in the database.
-- **Fas 4 — Master-bibliotek**: consolidate onto one source (likely a LaCie drive) as the master copy — cleaned, tagged, searchable. Possibly a small custom search UI on top of the SQLite db.
+The phase plan and module layout below are brainstormed ideas, not a locked spec — nothing past Fas 1 is committed to. Claude Code acts as the project's "Master Code Writer": lead on architecture and propose better approaches rather than implementing the sketch literally.
 
-Planned module layout (only `scan_bilder_v2.py` exists so far; the rest are Fas 2/3/4 work, not yet written):
+Phase plan (draft, only Fas 1 is done/settled):
+- **Fas 1 — Inventering ✅ Klar**: index all photos from all sources into SQLite (this script). EXIF, camera info, date, GPS.
+- **Fas 2 — Rensning (next, draft)**: MD5 exact duplicates removed; perceptual hashing to identify burst sequences and near-duplicates; manual review of candidates before sending to the bitbucket.
+- **Fas 3 — Taggning (draft)**: automatic tagging via an AI vision API (send an image, get back a description like "Two people at a dinner table, indoors, summer, likely 2010s"); `imagehash` for visual grouping; manual completion/correction of tags in the database.
+- **Fas 4 — Master-bibliotek (draft)**: consolidate onto one source (likely a LaCie drive) as the master copy — cleaned, tagged, searchable. Possibly a small custom search UI on top of the SQLite db.
+
+Sketched module layout (draft — only `scan_bilder_v2.py` exists; names/split below are a starting idea, not final):
 ```
 Bildsortering/
 ├── scan_bilder_v2.py      # ✅ Klar — Fas 1, inventory scan
