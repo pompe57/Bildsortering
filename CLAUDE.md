@@ -41,4 +41,23 @@ Re-running the script against the same `--db` file accumulates new `källor`/`bi
 
 ## Project context
 
-This script is Fas 1 (inventory) of a longer-term photo archive cleanup project. See the project's own notes for the full phase plan and current findings — ask Claude Code to recall project context if picking this up in a new session.
+Long-term goal: end up with a cleaned, tagged photo archive — captions explaining what's in each kept photo, and bad shots/duplicates/near-duplicate burst shots sent to "the big bitbucket in the sky."
+
+Phase plan:
+- **Fas 1 — Inventering ✅ Klar**: index all photos from all sources into SQLite (this script). EXIF, camera info, date, GPS.
+- **Fas 2 — Rensning (next)**: MD5 exact duplicates removed; perceptual hashing to identify burst sequences and near-duplicates; manual review of candidates before sending to the bitbucket.
+- **Fas 3 — Taggning**: automatic tagging via an AI vision API (send an image, get back a description like "Two people at a dinner table, indoors, summer, likely 2010s"); `imagehash` for visual grouping; manual completion/correction of tags in the database.
+- **Fas 4 — Master-bibliotek**: consolidate onto one source (likely a LaCie drive) as the master copy — cleaned, tagged, searchable. Possibly a small custom search UI on top of the SQLite db.
+
+Planned module layout (only `scan_bilder_v2.py` exists so far; the rest are Fas 2/3/4 work, not yet written):
+```
+Bildsortering/
+├── scan_bilder_v2.py      # ✅ Klar — Fas 1, inventory scan
+├── phash_index.py         # Fas 2 — compute perceptual hash
+├── duplicates.py          # Fas 2 — find and report duplicates
+├── ai_tagger.py           # Fas 3 — AI-based image tagging
+├── cleanup.py             # Fas 2/4 — move/delete approved candidates
+├── requirements.txt
+├── CLAUDE.md
+└── onedrive.db            # the database (gitignored, machine-local)
+```
